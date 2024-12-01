@@ -1,0 +1,455 @@
+[
+    {
+        "label": "BaseSettings",
+        "importPath": "pydantic_settings",
+        "description": "pydantic_settings",
+        "isExtraImport": true,
+        "detail": "pydantic_settings",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "field_validator",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timezone",
+        "importPath": "pytz",
+        "description": "pytz",
+        "isExtraImport": true,
+        "detail": "pytz",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "isExtraImport": true,
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "app.tools.date_calc.router",
+        "description": "app.tools.date_calc.router",
+        "isExtraImport": true,
+        "detail": "app.tools.date_calc.router",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "app.tools.loan_emi.router",
+        "description": "app.tools.loan_emi.router",
+        "isExtraImport": true,
+        "detail": "app.tools.loan_emi.router",
+        "documentation": {}
+    },
+    {
+        "label": "Settings",
+        "kind": 6,
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "peekOfCode": "class Settings(BaseSettings):\n    APP_NAME: str = \"FastAPI Tool API\"\n    API_V1_PREFIX: str = \"/api/v1\"\n    ENVIRONMENT: str = \"development\"\n    class Config:\n        env_file = \".env\"\nsettings = Settings()",
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "kind": 5,
+        "importPath": "app.core.config",
+        "description": "app.core.config",
+        "peekOfCode": "settings = Settings()",
+        "detail": "app.core.config",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.tools.date_calc.router",
+        "description": "app.tools.date_calc.router",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/date-difference\", response_model=DaysResponse)\nasync def date_difference(request: DateRangeRequest):\n    days = calculate_date_difference(request.start_date, request.end_date)\n    return {\"days\": days}\n@router.post(\"/days-until\", response_model=DaysResponse)\nasync def days_until(request: DateRequest):\n    days = days_until_event(request.date)\n    return {\"days\": days}\n@router.post(\"/days-since\", response_model=DaysResponse)",
+        "detail": "app.tools.date_calc.router",
+        "documentation": {}
+    },
+    {
+        "label": "DateRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DateRequest(BaseModel):\n    date: str\n    # Validate date format\n    @field_validator(\"date\", mode=\"before\")\n    @classmethod\n    def validate_date_format(cls, value: str) -> str:\n        try:\n            datetime.strptime(value, \"%Y-%m-%d\")\n            return value\n        except ValueError:",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DateRangeRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DateRangeRequest(BaseModel):\n    start_date: str\n    end_date: str\n    # Validate start_date format\n    @field_validator(\"start_date\", mode=\"before\")\n    @classmethod\n    def validate_start_date_format(cls, value: str) -> str:\n        try:\n            datetime.strptime(value, \"%Y-%m-%d\")\n            return value",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DaysResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DaysResponse(BaseModel):\n    days: int\nclass DetailedDateDifferenceResponse(BaseModel):\n    days: int\n    weeks: int\n    months: int\n    years: int\nclass CountdownResponse(BaseModel):\n    days: int\n    hours: int",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DetailedDateDifferenceResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DetailedDateDifferenceResponse(BaseModel):\n    days: int\n    weeks: int\n    months: int\n    years: int\nclass CountdownResponse(BaseModel):\n    days: int\n    hours: int\n    minutes: int\n    seconds: int",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "CountdownResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class CountdownResponse(BaseModel):\n    days: int\n    hours: int\n    minutes: int\n    seconds: int\n# Input schemas\nclass DateRequest(BaseModel):\n    date: str\nclass DateTimeRequest(BaseModel):\n    date_time: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DateRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DateRequest(BaseModel):\n    date: str\nclass DateTimeRequest(BaseModel):\n    date_time: str\n    from_tz: str\n    to_tz: str\nclass SleepRequest(BaseModel):\n    start_time: str\n    end_time: str\nclass DateRangeRequest(BaseModel):",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DateTimeRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DateTimeRequest(BaseModel):\n    date_time: str\n    from_tz: str\n    to_tz: str\nclass SleepRequest(BaseModel):\n    start_time: str\n    end_time: str\nclass DateRangeRequest(BaseModel):\n    start_date: str\n    end_date: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "SleepRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class SleepRequest(BaseModel):\n    start_time: str\n    end_time: str\nclass DateRangeRequest(BaseModel):\n    start_date: str\n    end_date: str\n# Response schemas\nclass ZodiacResponse(BaseModel):\n    zodiac_sign: str\nclass HoursResponse(BaseModel):",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "DateRangeRequest",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class DateRangeRequest(BaseModel):\n    start_date: str\n    end_date: str\n# Response schemas\nclass ZodiacResponse(BaseModel):\n    zodiac_sign: str\nclass HoursResponse(BaseModel):\n    work_hours: int\nclass SleepDurationResponse(BaseModel):\n    hours: int",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "ZodiacResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class ZodiacResponse(BaseModel):\n    zodiac_sign: str\nclass HoursResponse(BaseModel):\n    work_hours: int\nclass SleepDurationResponse(BaseModel):\n    hours: int\n    minutes: int\nclass HeartbeatsResponse(BaseModel):\n    heartbeats: int\nclass ConvertedTimeResponse(BaseModel):",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "HoursResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class HoursResponse(BaseModel):\n    work_hours: int\nclass SleepDurationResponse(BaseModel):\n    hours: int\n    minutes: int\nclass HeartbeatsResponse(BaseModel):\n    heartbeats: int\nclass ConvertedTimeResponse(BaseModel):\n    converted_time: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "SleepDurationResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class SleepDurationResponse(BaseModel):\n    hours: int\n    minutes: int\nclass HeartbeatsResponse(BaseModel):\n    heartbeats: int\nclass ConvertedTimeResponse(BaseModel):\n    converted_time: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "HeartbeatsResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class HeartbeatsResponse(BaseModel):\n    heartbeats: int\nclass ConvertedTimeResponse(BaseModel):\n    converted_time: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "ConvertedTimeResponse",
+        "kind": 6,
+        "importPath": "app.tools.date_calc.schema",
+        "description": "app.tools.date_calc.schema",
+        "peekOfCode": "class ConvertedTimeResponse(BaseModel):\n    converted_time: str",
+        "detail": "app.tools.date_calc.schema",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_date_difference",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def calculate_date_difference(start_date: str, end_date: str) -> int:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    return (end - start).days\n# Calculate days until an event\ndef days_until_event(event_date: str) -> int:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    return (event - today).days\n# Calculate days since an event",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "days_until_event",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def days_until_event(event_date: str) -> int:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    return (event - today).days\n# Calculate days since an event\ndef days_since_event(event_date: str) -> int:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    return (today - event).days\n# Calculate detailed difference",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "days_since_event",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def days_since_event(event_date: str) -> int:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    return (today - event).days\n# Calculate detailed difference\ndef detailed_date_difference(start_date: str, end_date: str) -> dict:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    delta = end - start\n    days = delta.days",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "detailed_date_difference",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def detailed_date_difference(start_date: str, end_date: str) -> dict:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    delta = end - start\n    days = delta.days\n    weeks = days // 7\n    months = days // 30  # Approximation\n    years = days // 365  # Approximation\n    return {\"days\": days, \"weeks\": weeks, \"months\": months, \"years\": years}\n# Future date from now",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "future_date_from_now",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def future_date_from_now(days_to_add: int) -> str:\n    future_date = datetime.now() + timedelta(days=days_to_add)\n    return future_date.strftime(\"%Y-%m-%d\")\n# Past date from now\ndef past_date_from_now(days_to_subtract: int) -> str:\n    past_date = datetime.now() - timedelta(days=days_to_subtract)\n    return past_date.strftime(\"%Y-%m-%d\")\n# Calculate age\ndef calculate_age(birth_date: str) -> dict:\n    birth = datetime.strptime(birth_date, \"%Y-%m-%d\")",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "past_date_from_now",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def past_date_from_now(days_to_subtract: int) -> str:\n    past_date = datetime.now() - timedelta(days=days_to_subtract)\n    return past_date.strftime(\"%Y-%m-%d\")\n# Calculate age\ndef calculate_age(birth_date: str) -> dict:\n    birth = datetime.strptime(birth_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    years = today.year - birth.year\n    months = today.month - birth.month\n    days = today.day - birth.day",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_age",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def calculate_age(birth_date: str) -> dict:\n    birth = datetime.strptime(birth_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    years = today.year - birth.year\n    months = today.month - birth.month\n    days = today.day - birth.day\n    if months < 0:\n        years -= 1\n        months += 12\n    if days < 0:",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "business_days_difference",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def business_days_difference(start_date: str, end_date: str) -> int:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    business_days = 0\n    current = start\n    while current <= end:\n        if current.weekday() < 5:  # Monday-Friday\n            business_days += 1\n        current += timedelta(days=1)\n    return business_days",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "next_occurrence",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def next_occurrence(event_date: str) -> str:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    today = datetime.now()\n    next_event = event.replace(year=today.year)\n    if next_event < today:\n        next_event = next_event.replace(year=today.year + 1)\n    return next_event.strftime(\"%Y-%m-%d\")\n# Countdown to an event\ndef countdown_to_event(event_date: str) -> dict:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "countdown_to_event",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def countdown_to_event(event_date: str) -> dict:\n    event = datetime.strptime(event_date, \"%Y-%m-%d\")\n    now = datetime.now()\n    # Check if the event is in the past or future\n    if event < now:\n        delta = now - event  # Time since the event\n        sign = -1\n    else:\n        delta = event - now  # Time until the event\n        sign = 1",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "find_zodiac_sign",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def find_zodiac_sign(birth_date: str) -> str:\n    date = datetime.strptime(birth_date, \"%Y-%m-%d\")\n    month = date.month\n    day = date.day\n    if (month == 1 and day >= 20) or (month == 2 and day <= 18):\n        return \"Aquarius\"\n    elif (month == 2 and day >= 19) or (month == 3 and day <= 20):\n        return \"Pisces\"\n    elif (month == 3 and day >= 21) or (month == 4 and day <= 19):\n        return \"Aries\"",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_work_hours",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def calculate_work_hours(start_date: str, end_date: str, hours_per_day: int = 8) -> int:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    total_days = (end - start).days + 1\n    # Exclude weekends (Saturday and Sunday)\n    work_days = sum(1 for day in range(total_days) if (start + timedelta(days=day)).weekday() < 5)\n    return work_days * hours_per_day\n### Sleep Duration\ndef calculate_sleep_duration(start_time: str, end_time: str) -> dict:\n    start = datetime.strptime(start_time, \"%H:%M\")",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_sleep_duration",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def calculate_sleep_duration(start_time: str, end_time: str) -> dict:\n    start = datetime.strptime(start_time, \"%H:%M\")\n    end = datetime.strptime(end_time, \"%H:%M\")\n    if end < start:\n        end += timedelta(days=1)  # Handle overnight sleep\n    duration = end - start\n    hours = duration.seconds // 3600\n    minutes = (duration.seconds % 3600) // 60\n    return {\"hours\": hours, \"minutes\": minutes}\n### Date calculate in different units",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "date_difference_in_heartbeats",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def date_difference_in_heartbeats(start_date: str, end_date: str, bpm: int = 70) -> int:\n    start = datetime.strptime(start_date, \"%Y-%m-%d\")\n    end = datetime.strptime(end_date, \"%Y-%m-%d\")\n    total_minutes = (end - start).total_seconds() / 60\n    return int(total_minutes * bpm)\ndef convert_time_zone(date_time: str, from_tz: str, to_tz: str) -> str:\n    dt = datetime.strptime(date_time, \"%Y-%m-%d %H:%M:%S\")\n    from_zone = timezone(from_tz)\n    to_zone = timezone(to_tz)\n    localized_dt = from_zone.localize(dt)",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "convert_time_zone",
+        "kind": 2,
+        "importPath": "app.tools.date_calc.service",
+        "description": "app.tools.date_calc.service",
+        "peekOfCode": "def convert_time_zone(date_time: str, from_tz: str, to_tz: str) -> str:\n    dt = datetime.strptime(date_time, \"%Y-%m-%d %H:%M:%S\")\n    from_zone = timezone(from_tz)\n    to_zone = timezone(to_tz)\n    localized_dt = from_zone.localize(dt)\n    converted_dt = localized_dt.astimezone(to_zone)\n    return converted_dt.strftime(\"%Y-%m-%d %H:%M:%S\")",
+        "detail": "app.tools.date_calc.service",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "app.tools.loan_emi.router",
+        "description": "app.tools.loan_emi.router",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/\")\nasync def loan_emi(request: LoanRequest) -> LoanResponse:\n    emi = calculate_loan_emi(request.principal, request.rate, request.time)\n    return LoanResponse(emi=emi)",
+        "detail": "app.tools.loan_emi.router",
+        "documentation": {}
+    },
+    {
+        "label": "LoanRequest",
+        "kind": 6,
+        "importPath": "app.tools.loan_emi.schema",
+        "description": "app.tools.loan_emi.schema",
+        "peekOfCode": "class LoanRequest(BaseModel):\n    principal: float\n    rate: float\n    time: int\nclass LoanResponse(BaseModel):\n    emi: float",
+        "detail": "app.tools.loan_emi.schema",
+        "documentation": {}
+    },
+    {
+        "label": "LoanResponse",
+        "kind": 6,
+        "importPath": "app.tools.loan_emi.schema",
+        "description": "app.tools.loan_emi.schema",
+        "peekOfCode": "class LoanResponse(BaseModel):\n    emi: float",
+        "detail": "app.tools.loan_emi.schema",
+        "documentation": {}
+    },
+    {
+        "label": "calculate_loan_emi",
+        "kind": 2,
+        "importPath": "app.tools.loan_emi.service",
+        "description": "app.tools.loan_emi.service",
+        "peekOfCode": "def calculate_loan_emi(principal: float, rate: float, time: int) -> float:\n    monthly_rate = rate / (12 * 100)\n    emi = (principal * monthly_rate * ((1 + monthly_rate)**time)) / (((1 + monthly_rate)**time) - 1)\n    return round(emi, 2)",
+        "detail": "app.tools.loan_emi.service",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app.main",
+        "description": "app.main",
+        "peekOfCode": "app = FastAPI(title=\"Tool API Platform\")\n# Register routes for each tool\napp.include_router(date_diff_router, prefix=\"/api/v1/date-diff\", tags=[\"Date Caculator\"])\napp.include_router(loan_emi_router, prefix=\"/api/v1/loan-emi\", tags=[\"Loan EMI\"])\n@app.get(\"/\")\nasync def root():\n    return {\"message\": \"Welcome to the Tool API Platform!\"}",
+        "detail": "app.main",
+        "documentation": {}
+    }
+]
