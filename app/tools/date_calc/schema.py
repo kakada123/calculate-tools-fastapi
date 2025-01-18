@@ -1,4 +1,4 @@
-from pydantic import BaseModel, field_validator, ValidationError
+from pydantic import BaseModel, field_validator
 from datetime import datetime
 
 # Base schemas with validation
