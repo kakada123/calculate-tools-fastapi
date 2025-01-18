@@ -65,24 +65,52 @@ class CountdownResponse(BaseModel):
     minutes: int
     seconds: int
 
-
-# Input schemas
-class DateRequest(BaseModel):
-    date: str
-
+# ✅ Validate datetime format and timezones
 class DateTimeRequest(BaseModel):
     date_time: str
     from_tz: str
     to_tz: str
 
+    @field_validator("date_time", mode="before")
+    @classmethod
+    def validate_datetime_format(cls, value: str) -> str:
+        try:
+            datetime.strptime(value, "%Y-%m-%d %H:%M:%S")  # Format: YYYY-MM-DD HH:MM:SS
+            return value
+        except ValueError:
+            raise ValueError(f"'{value}' is not a valid datetime in the format YYYY-MM-DD HH:MM:SS.")
+
+    @field_validator("from_tz", "to_tz")
+    @classmethod
+    def validate_timezone(cls, value: str) -> str:
+        valid_timezones = ["UTC", "Asia/Phnom_Penh", "America/New_York", "Europe/London"]
+        if value not in valid_timezones:
+            raise ValueError(f"'{value}' is not a supported timezone.")
+        return value
+
+
+# ✅ Validate sleep start and end times
 class SleepRequest(BaseModel):
     start_time: str
     end_time: str
 
-class DateRangeRequest(BaseModel):
-    start_date: str
-    end_date: str
+    @field_validator("start_time", "end_time", mode="before")
+    @classmethod
+    def validate_time_format(cls, value: str) -> str:
+        try:
+            datetime.strptime(value, "%H:%M")  # Format: HH:MM
+            return value
+        except ValueError:
+            raise ValueError(f"'{value}' is not a valid time in the format HH:MM.")
 
+    @field_validator("end_time", mode="after")
+    @classmethod
+    def validate_time_order(cls, value: str, info) -> str:
+        start_time = datetime.strptime(info.data["start_time"], "%H:%M")
+        end_time = datetime.strptime(value, "%H:%M")
+        if end_time <= start_time:
+            raise ValueError("end_time must be after start_time.")
+        return value
 # Response schemas
 class ZodiacResponse(BaseModel):
     zodiac_sign: str
